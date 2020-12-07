@@ -59,6 +59,7 @@ def create(req):
         return render(req, 'create.html', context)
     else:
         form = WatchCreateForm(req.POST, req.FILES)
+        form.instance.user = req.user.userprofile
         if form.is_valid():
             form.save()
             return redirect('index')
