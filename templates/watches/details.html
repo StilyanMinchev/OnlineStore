@@ -1,0 +1,17 @@
+{% extends 'common/base/base.html' %}
+{% block site_content %}
+<div class="card m-3" style="width: 18rem;">
+    <img class="card-img-top" src="{{ watch.image.url }}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{ watch.name }}</h5>
+        <p class="card-text">{{ watch.description }}</p>
+        <p class="card-text">{{ watch.price }}$</p>
+        <p class="card-text"><strong>Owner: {{ watch.user.user.username }}</strong></p>
+        {#        <a href="{% url 'watch details' watch.id watch.name %}">See more</a>#}
+        {#        <a href="{% url 'watch details' watch.id %}">See more</a>#}
+        {% if watch.can_delete %}
+            <button class="btn btn-danger">Delete</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

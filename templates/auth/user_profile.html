@@ -1,0 +1,51 @@
+{% extends 'common/base/base.html' %}
+{% block site_heading %}
+    Hello, {{ profile_user.username }}!
+{% endblock %}
+{% block site_content %}
+    <div class="text-center">
+        {% if profile.profile_image %}
+            <img class="rounded-circle mb-3" src="{{ profile.profile_image.url }}" alt="Generic placeholder image"
+                 width="140"
+                 height="140">
+        {% else %}
+            <img class="rounded-circle mb-3"
+                 src="https://png.pngitem.com/pimgs/s/247-2472306_admin-anonymous-person-icon-hd-png-download.png"
+                 alt="Generic placeholder image" width="140"
+                 height="140">
+        {% endif %}
+        <div class="w-50 m-auto">
+            <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
+                <div class="custom-file">
+                    <label class="custom-file-label" for="image">Choose Image File</label>
+                    {{ form.profile_image }}
+                    {% csrf_token %}
+                </div>
+                <button class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    {% if watches %}
+        <h2 class='text-center'>These are you watch photos</h2>
+        <div class="row">
+            {% for watch in watches %}
+                <div class="col-lg-3">
+                    <div class="card m-3" style="width: 18rem;">
+                        <img src="{{ watch.image.url }}" class="card-img-top size" alt="Image of {{ watch.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ watch.name }}</h5>
+                            <p class="card-text">{{ watch.description }}</p>
+                            <a href="{% url 'watch details' watch.id %}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center">
+            <h2>You have no watches</h2>
+            <a href="{% url 'create' %}" class="btn btn-success">Add watch Photo</a>
+        </div>
+    {% endif %}
+{% endblock %}

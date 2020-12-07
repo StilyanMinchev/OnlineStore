@@ -1,0 +1,16 @@
+{% extends 'common/base/base.html' %}
+{% block site_heading %}
+    All Watches
+{% endblock %}
+{% block site_content %}
+    <form method="get" action="{% url 'index' %}">
+        {{ filter_form }}
+        {% csrf_token %}
+        <button>Filter</button>
+    </form>
+    <div class="d-flex p-4">
+        {% for watch in watches %}
+            {% include 'partials/item_visualization.html' with watch=watch %}
+        {% endfor %}
+    </div>
+{% endblock %}
