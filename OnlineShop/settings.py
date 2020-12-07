@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'store',
     'store_auth',
     'bootstrap4',
+    'common',
 ]
 
 MIDDLEWARE = [

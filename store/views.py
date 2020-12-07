@@ -36,11 +36,14 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def watch_details(request, pk, slug=None):
     watch = Watch.objects.get(pk=pk)
     # if slug and watch.name.lower() != slug.lower():
     #     return redirect('404')
     context = {
+        'can_delete': request.user == watch.user.user,
+        'can_edit': request.user == watch.user.user,
         'watch': watch,
     }
 
@@ -71,6 +74,7 @@ def create(req):
 
         return render(req, 'create.html', context)
 
+
 # class Create(LoginRequiredMixin, FormView):
 #     form_class = WatchCreateForm
 #     template_name = 'create.html'
@@ -79,3 +83,43 @@ def create(req):
 #     def form_valid(self, form):
 #         form.save()
 #         return super().form_valid(form)
+
+def delete_watch(request, pk):
+    watch = Watch.objects.get(pk=pk)
+    if request.method == 'GET':
+        context = {
+            'watch': watch,
+        }
+
+        return render(request, 'delete_watch.html', context)
+    else:
+        watch.delete()
+        return redirect('index')
+
+
+def edit_watch(request, pk):
+    watch = Watch.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = WatchCreateForm(instance=watch)
+
+        context = {
+            'form': form,
+            'watch': watch,
+        }
+
+        return render(request, 'edit_watch.html', context)
+    else:
+        form = WatchCreateForm(
+            request.POST,
+            instance=watch
+        )
+        if form.is_valid():
+            form.save()
+            return redirect('watches/details.html', watch.pk)
+
+        context = {
+            'form': form,
+            'pet': watch,
+        }
+
+        return render(request, f'edit_watch.html', context)

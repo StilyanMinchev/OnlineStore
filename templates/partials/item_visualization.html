@@ -2,7 +2,7 @@
     <img class="card-img-top" src="{{ watch.image.url }}" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">{{ watch.name }}</h5>
-        <p class="card-text">{{ watch.description }}</p>
+{#        <p class="card-text">{{ watch.description }}</p>#}
         <p class="card-text">{{ watch.price }}$</p>
         <a href="{% url 'watch details' watch.id %}" class="btn btn-primary">Details</a>
         {% if watch.can_delete %}

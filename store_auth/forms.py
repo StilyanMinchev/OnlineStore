@@ -28,11 +28,12 @@ class RegisterForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
+
     class Meta:
         model = UserProfile
-        widgets={
-            'profile_image': forms.FileInput(attrs={'class': 'custom-file-input'})
-        }
+        # widgets = {
+        #     'profile_image': forms.FileInput(attrs={'class': 'custom-file-input'})
+        # }
         # fields = ('profile_image',)
         exclude = ('user',)
         # fields= '__all__'

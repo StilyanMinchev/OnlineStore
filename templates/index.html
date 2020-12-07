@@ -8,9 +8,13 @@
         {% csrf_token %}
         <button>Filter</button>
     </form>
-    <div class="d-flex p-4">
+    <div class="row">
         {% for watch in watches %}
-            {% include 'partials/item_visualization.html' with watch=watch %}
+            <div class="col-lg-4">
+                    {% include 'partials/item_visualization.html' with watch=watch %}
+            </div>
         {% endfor %}
+
     </div>
+
 {% endblock %}

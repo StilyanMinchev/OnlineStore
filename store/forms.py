@@ -18,7 +18,8 @@ class WatchCreateForm(forms.ModelForm):
         widgets = {
             'image': forms.FileInput(attrs={'class': 'custom-file-input'}),
         }
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ('user',)
 
 
 class FilterForm(forms.Form):

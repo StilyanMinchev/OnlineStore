@@ -16,18 +16,17 @@
         {% endif %}
         <div class="w-50 m-auto">
             <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
-                <div class="custom-file">
-                    <label class="custom-file-label" for="image">Choose Image File</label>
-                    {{ form.profile_image }}
-                    {% csrf_token %}
-                </div>
-                <button class="btn btn-primary">Upload</button>
-            </form>
-        </div>
+                {#                <div class="custom-file">#}
+                {#                    <label class="custom-file-label" for="image">Choose Image File</label>#}
+                {{ form.profile_image }}
+                {% csrf_token %}
+        <button class="btn btn-primary">Upload</button>
+        </form>
+    </div>
     </div>
     <hr>
     {% if watches %}
-        <h2 class='text-center'>These are you watch photos</h2>
+        <h2 class='text-center'>These are you Watch Ads</h2>
         <div class="row">
             {% for watch in watches %}
                 <div class="col-lg-3">
@@ -36,7 +35,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ watch.name }}</h5>
                             <p class="card-text">{{ watch.description }}</p>
-                            <a href="{% url 'watch details' watch.id %}" class="btn btn-primary">Details</a>
+                            <p class="card-number">{{ watch.price }}$</p>
+                            <a href="{% url 'delete watch' watch.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'edit watch' watch.id %}" class="btn btn-warning">Edit</a>
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
     {% else %}
         <div class="text-center">
             <h2>You have no watches</h2>
-            <a href="{% url 'create' %}" class="btn btn-success">Add watch Photo</a>
+            <a href="{% url 'create' %}" class="btn btn-success">Add</a>
         </div>
     {% endif %}
 {% endblock %}
