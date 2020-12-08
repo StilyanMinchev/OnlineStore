@@ -98,14 +98,11 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.todo
 .env
 .venv
-todo/
 env/
 venv/
 ENV/
-todo.bak/
 env.bak/
 venv.bak/
 
