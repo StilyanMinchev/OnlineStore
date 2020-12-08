@@ -4,12 +4,12 @@
         <h5 class="card-title">{{ watch.name }}</h5>
 {#        <p class="card-text">{{ watch.description }}</p>#}
         <p class="card-text">{{ watch.price }}$</p>
-        <a href="{% url 'watch details' watch.id %}" class="btn btn-primary">Details</a>
-        {% if watch.can_delete %}
-            <button class="btn btn-danger">Delete</button>
-        {% endif %}
-        {% if watch.can_edit %}
-            <button class="btn btn-warning">Edit</button>
-        {% endif %}
+        <a href="{% url 'watch details' watch.id %}" class="btn btn-secondary">Details</a>
+{#        {% if watch.can_delete %}#}
+{#            <button class="btn btn-danger">Delete</button>#}
+{#        {% endif %}#}
+{#        {% if watch.can_edit %}#}
+{#            <button class="btn btn-warning">Edit</button>#}
+{#        {% endif %}#}
     </div>
 </div>

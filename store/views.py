@@ -89,6 +89,7 @@ def delete_watch(request, pk):
     if request.method == 'GET':
         context = {
             'watch': watch,
+            'current_page': 'delete watch',
         }
 
         return render(request, 'delete_watch.html', context)
@@ -105,6 +106,7 @@ def edit_watch(request, pk):
         context = {
             'form': form,
             'watch': watch,
+            'current_page': 'edit watch',
         }
 
         return render(request, 'edit_watch.html', context)
@@ -120,6 +122,7 @@ def edit_watch(request, pk):
         context = {
             'form': form,
             'pet': watch,
+            'current_page': 'edit watch',
         }
 
         return render(request, f'edit_watch.html', context)

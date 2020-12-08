@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 
-        <div class="navbar-brand">WatchMaket</div>
+    <img rel="icon" class="logo" src="/media/favicon.png" alt="logo">
+    <div class="navbar-brand">WatchMarket</div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +10,7 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-{#                <a class="nav-link" href="{% url 'landing_page' %}">WatchMarket</a>#}
+            {#                <a class="nav-link" href="{% url 'landing_page' %}">WatchMarket</a>#}
             <li class="nav-item {% if current_page == 'index' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
