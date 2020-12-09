@@ -10,23 +10,26 @@
                  height="140">
         {% else %}
             <img class="rounded-circle mb-3"
-                 src="https://png.pngitem.com/pimgs/s/247-2472306_admin-anonymous-person-icon-hd-png-download.png"
+                 src="https://www.pngitem.com/pimgs/m/247-2472306_admin-anonymous-person-icon-hd-png-download.png"
                  alt="Generic placeholder image" width="140"
                  height="140">
         {% endif %}
         <div class="w-50 m-auto">
+            {% if profile_user == user %}
             <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
                 {#                <div class="custom-file">#}
                 {#                    <label class="custom-file-label" for="image">Choose Image File</label>#}
-                {{ form.profile_image }}
+                {#                {{ form.profile_image }}#}
+                {{ form }}
                 {% csrf_token %}
-        <button class="btn btn-secondary">Upload</button>
-        </form>
-    </div>
+                <button class="btn btn-secondary">Upload</button>
+            </form>
+            {% endif %}
+        </div>
     </div>
     <hr>
     {% if watches %}
-        <h2 class='text-center'>These are you Watch Ads</h2>
+        <h2 class='text-center'>My Watch Ads</h2>
         <div class="row">
             {% for watch in watches %}
                 <div class="col-lg-3">
@@ -36,8 +39,10 @@
                             <h5 class="card-title">{{ watch.name }}</h5>
                             <p class="card-text">{{ watch.description }}</p>
                             <p class="card-number">{{ watch.price }}$</p>
-                            <a href="{% url 'delete watch' watch.id %}" class="btn btn-danger">Delete</a>
-                            <a href="{% url 'edit watch' watch.id %}" class="btn btn-warning">Edit</a>
+                            {% if profile_user == user %}
+                                <a href="{% url 'delete watch' watch.id %}" class="btn btn-danger">Delete</a>
+                                <a href="{% url 'edit watch' watch.id %}" class="btn btn-warning">Edit</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

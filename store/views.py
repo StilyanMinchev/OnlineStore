@@ -117,11 +117,12 @@ def edit_watch(request, pk):
         )
         if form.is_valid():
             form.save()
-            return redirect('watches/details.html', watch.pk)
+            # return redirect('watches/details.html', watch.pk)
+            return redirect('index')
 
         context = {
             'form': form,
-            'pet': watch,
+            'watch': watch,
             'current_page': 'edit watch',
         }
 
