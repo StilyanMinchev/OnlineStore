@@ -1,4 +1,6 @@
 .logo {
     max-width: 40px;
     max-height: 40px;
+    margin: 0px 10px 0px 0px;
+    border-radius: 30%;
 }

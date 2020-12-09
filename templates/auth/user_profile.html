@@ -1,3 +1,8 @@
+{#<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>#}
+{#<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>#}
+{##}
+
 {% extends 'common/base/base.html' %}
 {% block site_heading %}
     Hello, {{ profile_user.username }}!
@@ -16,14 +21,13 @@
         {% endif %}
         <div class="w-50 m-auto">
             {% if profile_user == user %}
-            <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
-                {#                <div class="custom-file">#}
-                {#                    <label class="custom-file-label" for="image">Choose Image File</label>#}
-                {#                {{ form.profile_image }}#}
-                {{ form }}
-                {% csrf_token %}
-                <button class="btn btn-secondary">Upload</button>
-            </form>
+                <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input id="date_of_birth" name="date_of_birth" type="date">
+                    Profile image: {{ form.profile_image }}
+                    {% csrf_token %}
+                    <button class="btn btn-secondary">Upload</button>
+                </form>
             {% endif %}
         </div>
     </div>
@@ -55,3 +59,25 @@
         </div>
     {% endif %}
 {% endblock %}
+
+
+{#<script type="text/javascript">#}
+{#    $(document).on("click", ".browse", function () {#}
+{#        var file = $(this).parents().find(".file");#}
+{#        file.trigger("click");#}
+{#    });#}
+{#    $('input[type="file"]').change(function (e) {#}
+{#        var fileName = e.target.files[0].name;#}
+{#        $("#file").val(fileName);#}
+{##}
+{#        var reader = new FileReader();#}
+{#        reader.onload = function (e) {#}
+{#            // get loaded data and render thumbnail.#}
+{#            document.getElementById("preview").src = e.target.result;#}
+{#        };#}
+{#        // read the image file as a data URL.#}
+{#        reader.readAsDataURL(this.files[0]);#}
+{#    });#}
+{##}
+{#    Resources#}
+{#</script>#}
