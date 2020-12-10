@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from store.forms import FilterForm, WatchCreateForm
-from store.models import Watch
+from store.models import Watch, Like
 
 
 def extract_filter_values(params):
@@ -44,6 +44,9 @@ def watch_details(request, pk, slug=None):
     context = {
         'can_delete': request.user == watch.user.user,
         'can_edit': request.user == watch.user.user,
+        'can_like': request.user != watch.user.user,
+        'has_liked': watch.like_set.filter(user_id=request.user.userprofile.id).exists(),
+        # 'can_comment': request.user != watch.user.user,
         'watch': watch,
     }
 
@@ -127,3 +130,15 @@ def edit_watch(request, pk):
         }
 
         return render(request, f'edit_watch.html', context)
+
+
+def like_watch(request, pk):
+    like = Like.objects.filter(user_id=request.user.userprofile.id, watch_id=pk).first()
+    if like:
+        like.delete()
+    else:
+        watch = Watch.objects.get(pk=pk)
+        like = Like(test=str(pk), user=request.user.userprofile)
+        like.watch = watch
+        like.save()
+    return redirect('watch details', pk)

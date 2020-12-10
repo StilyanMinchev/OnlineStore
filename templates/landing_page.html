@@ -21,12 +21,12 @@
                 <h1 class="cover-heading"></h1>
                 <div class="row">
                     <div class="col-lg-6">
-                        <p class="lead">Already have an account? <br><a href="login user" style="margin: 10px 0px 0px 0px;"
+                        <p class="lead">Already have an account? <br><a href="{% url 'login user' %}" style="margin: 10px 0px 0px 0px;"
                                                                         class="btn btn-lg btn-secondary">Login</a></p>
                     </div>
                     <div class="col-lg-6">
                         <p class="lead"> Do not have an account? <br>
-                            <a href="register user" style="margin: 10px 0px 0px 0px;" class="btn btn-lg btn-secondary">Register</a>
+                            <a href="{% url 'register user' %}" style="margin: 10px 0px 0px 0px;" class="btn btn-lg btn-secondary">Register</a>
                         </p>
                     </div>
                 </div>
