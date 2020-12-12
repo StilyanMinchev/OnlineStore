@@ -17,7 +17,8 @@
             <li class="nav-item {% if current_page == 'index' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
-            <li class="nav-item {% if current_page == 'create' %} active {% endif %}">
+{#            <li class="nav-item {% if current_page == 'create' %} active {% endif %}">#}
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'create' %}">Add new Watch</a>
             </li>
         </ul>
