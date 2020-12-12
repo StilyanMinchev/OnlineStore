@@ -1,6 +1,6 @@
 from django import forms
 
-from store.models import Watch
+from store.models import Watch, Comment
 
 
 class WatchCreateForm(forms.ModelForm):
@@ -41,3 +41,17 @@ class FilterForm(forms.Form):
     # price= forms.CharField(
     #     required=False
     # )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
+        widgets = {
+            'text': forms.Textarea(
+                attrs={
+                    'class': 'form-control rounded-2',
+                    'is_required': True,
+                },
+            ),
+        }

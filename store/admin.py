@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from store.models import Watch, Like
+from store.models import Watch, Like, Comment
 
 
 class LikeInline(admin.TabularInline):
@@ -15,5 +15,10 @@ class WatchAdmin(admin.ModelAdmin):
     )
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'watch_id')
+
+
 admin.site.register(Watch)
 admin.site.register(Like)
+admin.site.register(Comment)

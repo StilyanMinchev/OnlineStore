@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import redirect, render
-
+from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
 from store_auth.forms import RegisterForm, ProfileForm, LoginForm
 
 
@@ -69,10 +70,13 @@ def login_user(request):
         return render(request, 'auth/login.html', context)
 
 
-@login_required
-def logout_user(request):
-    logout(request)
-    return redirect('index')
+# @login_required
+# def logout_user(request):
+#     logout(request)
+#     return redirect('index')
+
+class LogOutView(auth_views.LogoutView):
+    next_page = reverse_lazy('index')
 
 
 def user_profile(request, pk=None):
@@ -88,8 +92,6 @@ def user_profile(request, pk=None):
         return render(request, 'auth/user_profile.html', context)
     else:
         form = ProfileForm(request.POST, request.FILES, instance=user.userprofile)
-        # if request.user.userprofile.date_of_birth:
-        #     form.date_of_birth = request.user.userprofile.date_of_birth
         if form.is_valid():
             form.save()
             return redirect('current user profile')

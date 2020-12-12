@@ -23,9 +23,15 @@ class Like(models.Model):
     watch = models.ForeignKey(Watch, on_delete=models.CASCADE)
     test = models.CharField(max_length=2)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-#
-#
-# class Comment(models.Model):
-#     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
-#     text = models.TextField(blank=False)
-#     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Like'
+
+
+class Comment(models.Model):
+    watch = models.ForeignKey(Watch, on_delete=models.CASCADE)
+    text = models.TextField(blank=False)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Comment'
