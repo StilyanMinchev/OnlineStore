@@ -10,7 +10,7 @@
 
 Already Logged in:
 
-![logged_in](https://github.com/StilyanMinchev/OnlineStore/blob/master/static/readme/loggged.PNG?raw=true)
+![logged_in](https://github.com/StilyanMinchev/OnlineStore/blob/master/static/readme/logged.PNG?raw=true)
 
 Navbar:
 
