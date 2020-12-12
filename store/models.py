@@ -2,12 +2,13 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from store_auth.models import UserProfile
+from store.validators import positive_number
 
 
 class Watch(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=20)
     description = models.TextField(blank=False)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2, validators=(positive_number,))
     image = models.ImageField(
         upload_to='watches',
     )

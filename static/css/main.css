@@ -29,3 +29,16 @@ body {
 .button-margin {
     margin: 10px 0px 0px 0px;
 }
+
+#img_preview {
+    max-width: 80px;
+    min-height: 100px;
+    max-height: 140px;
+    margin: 5px;
+    padding: 3px;
+}
+
+.btn {
+    padding: 5px;
+    margin: 5px;
+}

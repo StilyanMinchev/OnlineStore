@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import mixins as auth_mixins
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from django.views import generic as views
 
@@ -69,17 +70,17 @@ class WatchDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
 
 # @group_required(groups=['Regular User'])
 @login_required
-def create(req):
-    if req.method == 'GET':
+def create(request):
+    if request.method == 'GET':
         context = {
             'form': WatchCreateForm(),
             'current_page': 'create',
         }
 
-        return render(req, 'create.html', context)
+        return render(request, 'create.html', context)
     else:
-        form = WatchCreateForm(req.POST, req.FILES)
-        form.instance.user = req.user.userprofile
+        form = WatchCreateForm(request.POST, request.FILES)
+        form.instance.user = request.user.userprofile
         if form.is_valid():
             form.save()
             return redirect('index')
@@ -89,61 +90,71 @@ def create(req):
             'current_page': 'create',
         }
 
-        return render(req, 'create.html', context)
+        return render(request, 'create.html', context)
 
 
-# class Create(LoginRequiredMixin, FormView):
-#     form_class = WatchCreateForm
-#     template_name = 'create.html'
-#     success_url = reverse_lazy('index')
+# def delete_watch(request, pk):
+#     watch = Watch.objects.get(pk=pk)
+#     if request.method == 'GET':
+#         context = {
+#             'watch': watch,
+#         }
 #
-#     def form_valid(self, form):
-#         form.save()
-#         return super().form_valid(form)
-
-def delete_watch(request, pk):
-    watch = Watch.objects.get(pk=pk)
-    if request.method == 'GET':
-        context = {
-            'watch': watch,
-            'current_page': 'delete watch',
-        }
-
-        return render(request, 'delete_watch.html', context)
-    else:
-        watch.delete()
-        return redirect('index')
+#         return render(request, 'delete_watch.html', context)
+#     else:
+#         watch.delete()
+#         return redirect('index')
 
 
-def edit_watch(request, pk):
-    watch = Watch.objects.get(pk=pk)
-    if request.method == 'GET':
-        form = WatchCreateForm(instance=watch)
+class DeleteWatchView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+    model = Watch
+    template_name = 'delete_watch.html'
+    success_url = reverse_lazy('index')
 
-        context = {
-            'form': form,
-            'watch': watch,
-            'current_page': 'edit watch',
-        }
+    def dispatch(self, request, *args, **kwargs):
+        watch = self.get_object()
+        if watch.user_id != request.user.userprofile.id:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
 
-        return render(request, 'edit_watch.html', context)
-    else:
-        form = WatchCreateForm(
-            request.POST,
-            instance=watch
-        )
-        if form.is_valid():
-            form.save()
-            # return redirect('watches/details.html', watch.pk)
-            return redirect('index')
 
-        context = {
-            'form': form,
-            'watch': watch,
-            'current_page': 'edit watch',
-        }
+# def edit_watch(request, pk):
+#     watch = Watch.objects.get(pk=pk)
+#     if request.method == 'GET':
+#         form = WatchCreateForm(instance=watch)
+#
+#         context = {
+#             'form': form,
+#             'watch': watch,
+#         }
+#
+#         return render(request, 'edit_watch.html', context)
+#     else:
+#         form = WatchCreateForm(
+#             request.POST,
+#             instance=watch
+#         )
+#         if form.is_valid():
+#             form.save()
+#             # return redirect('watches/details.html', watch.pk)
+#             return redirect('index')
+#
+#         context = {
+#             'form': form,
+#             'watch': watch,
+#         }
+#
+#         return render(request, f'edit_watch.html', context)
 
-        return render(request, f'edit_watch.html', context)
+
+class UpdateWatchView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+    template_name = 'edit_watch.html'
+    model = Watch
+    form_class = WatchCreateForm
+
+    def get_success_url(self):
+        url = reverse_lazy('watch details', kwargs={'pk': self.object.id})
+        return url
 
 
 # def like_watch(request, pk):

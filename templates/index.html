@@ -3,18 +3,22 @@
     All Watches
 {% endblock %}
 {% block site_content %}
-    <form method="get" action="{% url 'index' %}">
+
+    <form method="get" action="{% url 'index' %}" style="width:20rem">
         {{ filter_form }}
         {% csrf_token %}
-        <button>Filter</button>
+        <div class="text-center">
+            <button class="btn btn-secondary">Filter</button>
+        </div>
     </form>
-    <div class="row">
-        {% for watch in watches %}
-            <div class="col-lg-4">
+
+    <div class="container-fluid" style="width:90%">
+        <div class="row">
+            {% for watch in watches %}
+                <div class="col-lg-4 align-items-stretch">
                     {% include 'partials/item_visualization.html' with watch=watch %}
-            </div>
-        {% endfor %}
-
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
 {% endblock %}

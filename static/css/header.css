@@ -4,3 +4,21 @@
     margin: 0px 10px 0px 0px;
     border-radius: 30%;
 }
+
+.superuser {
+    color: #EC2FCA !important;
+    font-weight: 700;
+}
+
+.superuser:hover {
+    text-decoration: underline
+}
+
+.user {
+    color: #18E1DF !important;
+    font-weight: 700;
+}
+
+.user:hover {
+    text-decoration: underline
+}

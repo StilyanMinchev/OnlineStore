@@ -23,6 +23,14 @@ class WatchCreateForm(forms.ModelForm):
 
 
 class FilterForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field.widget.attrs.get('class'):
+                field.widget.attrs['class'] += ' form-control'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
     ORDER_ASC = 'asc'
     ORDER_DESC = 'desc'
 
@@ -31,16 +39,13 @@ class FilterForm(forms.Form):
         (ORDER_DESC, 'Descending'),
     )
 
-    text = forms.CharField(
+    Name = forms.CharField(
         required=False,
     )
-    order = forms.ChoiceField(
+    Order_by_name = forms.ChoiceField(
         choices=ORDER_CHOICES,
         required=False,
     )
-    # price= forms.CharField(
-    #     required=False
-    # )
 
 
 class CommentForm(forms.ModelForm):

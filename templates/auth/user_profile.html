@@ -1,6 +1,6 @@
 {% extends 'common/base/base.html' %}
 {% block site_heading %}
-    Hello, {{ profile_user.username }}!
+    {{ profile_user.username }}
 {% endblock %}
 {% block site_content %}
     <div class="text-center">
@@ -33,7 +33,7 @@
             {% for watch in watches %}
                 <div class="col-lg-3">
                     <div class="card m-3" style="width: 18rem;">
-                        <img src="{{ watch.image.url }}" class="card-img-top size" alt="Image of {{ watch.name }}">
+                        <img src="{{ watch.image.url }}" class="card-img-top size" alt="Image of {{ watch.name }}" style="height: 25rem">
                         <div class="card-body">
                             <h5 class="card-title">{{ watch.name }}</h5>
                             <p class="card-text">{{ watch.description }}</p>

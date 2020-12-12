@@ -35,7 +35,7 @@
         {% if watch.comment_set.all %}
             {% for comment in watch.comment_set.all %}
                 <div class="box">
-                    <a href="{% url 'user profile' comment.user_id %}">{{ comment.user.user.username }}</a>
+                    <strong><a href="{% url 'user profile' comment.user.user_id %}">{{ comment.user.user.username }}</a></strong>
                     <h5><em>{{ comment.text }}</em></h5>
                     <hr>
                 </div>

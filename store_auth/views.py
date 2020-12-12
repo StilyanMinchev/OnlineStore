@@ -92,8 +92,14 @@ def user_profile(request, pk=None):
         return render(request, 'auth/user_profile.html', context)
     else:
         form = ProfileForm(request.POST, request.FILES, instance=user.userprofile)
+        # if request.user.userprofile.date_of_birth:
+        #     form.date_of_birth = request.user.userprofile.date_of_birth
         if form.is_valid():
             form.save()
             return redirect('current user profile')
 
         return redirect('current user profile')
+
+
+def SignOutView(request):
+    return None

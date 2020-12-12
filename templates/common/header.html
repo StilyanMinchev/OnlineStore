@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0D0B0D">
 
     <img rel="icon" class="logo" src="/media/favicon.png" alt="logo">
     <div class="navbar-brand">WatchMarket</div>
@@ -11,6 +11,9 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             {#                <a class="nav-link" href="{% url 'landing_page' %}">WatchMarket</a>#}
+            {% if request.user.is_superuser %}
+                <a class="nav-link superuser" href="{% url 'admin:index' %}">Admin page</a>
+            {% endif %}
             <li class="nav-item {% if current_page == 'index' %} active {% endif %}">
                 <a class="nav-link" href="{% url 'index' %}">Home</a>
             </li>
@@ -22,7 +25,8 @@
     <div class="form-inline my-2 my-lg-0">
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'user profile' user.id %}">{{ user.username }}</a>
+                <a class="nav-link user" href="{% url 'user profile' user.id %}">Hello, {{ user.username }}!</a>
+
                 <a class="nav-link" href="{% url 'logout user' %}">Log out</a>
             {% else %}
                 <a class="nav-link" href="{% url 'login user' %}">Login</a>
@@ -31,3 +35,4 @@
         </ul>
     </div>
 </nav>
+{#</div>#}
