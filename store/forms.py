@@ -39,10 +39,10 @@ class FilterForm(forms.Form):
         (ORDER_DESC, 'Descending'),
     )
 
-    Name = forms.CharField(
+    text = forms.CharField(
         required=False,
     )
-    Order_by_name = forms.ChoiceField(
+    order = forms.ChoiceField(
         choices=ORDER_CHOICES,
         required=False,
     )

@@ -12,7 +12,7 @@
                         href="{% url 'user profile' watch.user.user_id %}"> {{ watch.user.user.username }}</a></strong>
                 </h5>
             </div>
-            <p class="mt-2">Description: {{ watch.description }}</p>
+            <p class="mt-2"><strong><u>Description</u></strong>: {{ watch.description }}</p>
             <div>
                 {% if can_delete %}
                     <a href="{% url 'delete watch' watch.id %}" class="btn btn-danger">Delete</a>
@@ -31,7 +31,7 @@
             <p class="mt-2">Likes: {{ watch.like_set.count }}</p>
         </div>
     </div>
-    <div class="d-block" style="background-color: #f1e3e3; padding:2%">
+    <div class="d-block" style="background-color: #F0E0C7; padding:2%">
         {% if watch.comment_set.all %}
             {% for comment in watch.comment_set.all %}
                 <div class="box">
@@ -50,7 +50,7 @@
                 <form method="post" action="{% url 'comment watch' watch.pk %}">
                     {{ form }}
                     {% csrf_token %}
-                    <button class="btn btn-primary mt-2" type="submit">Add comment</button>
+                    <button class="btn btn-secondary mt-2" type="submit">Add comment</button>
                 </form>
             </div>
         {% endif %}

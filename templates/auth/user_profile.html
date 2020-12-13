@@ -33,10 +33,10 @@
             {% for watch in watches %}
                 <div class="col-lg-3">
                     <div class="card m-3" style="width: 18rem;">
-                        <img src="{{ watch.image.url }}" class="card-img-top size" alt="Image of {{ watch.name }}" style="height: 25rem">
+                        <img src="{{ watch.image.url }}" class="card-img-top size" alt="Image of {{ watch.name }}" style="height: 17rem">
                         <div class="card-body">
                             <h5 class="card-title">{{ watch.name }}</h5>
-                            <p class="card-text">{{ watch.description }}</p>
+{#                            <p class="card-text">{{ watch.description }}</p>#}
                             <p class="card-number">{{ watch.price }}$</p>
                             {% if profile_user == user %}
                                 <a href="{% url 'watch details' watch.id %}" class="btn btn-secondary">Preview</a>

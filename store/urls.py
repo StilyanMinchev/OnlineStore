@@ -5,6 +5,7 @@ urlpatterns = [
     path('', index, name="index"),
     # path('<int:pk>/', views.watch_details, name="watch details"),
     path('<int:pk>/', WatchDetailsView.as_view(), name="watch details"),
+    # path('<slug:slug>/', WatchDetailsView.as_view(), name="watch details"),
     path('create/', create, name="create"),
     # path('delete/<int:pk>/', views.delete_watch, name='delete watch'),
     path('delete/<int:pk>/', DeleteWatchView.as_view(), name='delete watch'),
