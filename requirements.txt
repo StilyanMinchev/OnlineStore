@@ -8,4 +8,4 @@ psycopg2==2.8.6
 py-moneyed==0.8.0
 pytz==2020.4
 soupsieve==2.0.1
-sqlparse==0.4.1
+sqlparse==0.4.2
